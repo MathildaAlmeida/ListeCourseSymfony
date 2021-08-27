@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Course {% endblock %}
+
+{% block body %}
+
+<div class="form-group form-control">
+        {{ form_start(formCourse)}}
+    
+            <div class="col-4 mb-4">
+                <p>Produit :  {{ form_widget(formCourse.nom)}}
+                <button type="submit" class="btn btn-success"> + </button> </p>
+            </div>
+        {{ form_end(formCourse)}}
+</div>
+
+<hr>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+     {% for p in produit %}
+        <tr>
+            <td class="{% if p.isValid %} barre {% endif %}"> {{p.nom}} </td>
+            <td>
+                <a href="{{ path('valider',{ id:p.id }) }}" class="btn btn-primary"> V</a>
+                <a onclick="return confirm('Supprimer :{{ p.nom }} ?')" 
+                href="{{ path('supprimer',{ id:p.id }) }}"
+                class="btn btn-danger del">X</a>
+            </td>
+         </tr>
+          {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

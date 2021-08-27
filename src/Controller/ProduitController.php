@@ -26,7 +26,7 @@ class ProduitController extends AbstractController
 
         if ($formCourse->isSubmitted())
         {
-            
+            $course->setIsValid(false);
             $em->persist($course);
             $em->flush();
 
